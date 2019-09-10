@@ -64,16 +64,16 @@ public class ViewPhotosPresenter extends Presenter<PickPhotosView> {
                                     } while (mCursor.moveToNext());
                                 }
                                 mCursor.close();
-                                handler.sendEmptyMessage(0);
+
                             }
-
-
                             subscriber.onNext(null);
                         });
 
         task.subscribeOn(provider.io())
                 .observeOn(provider.ui())
-                .subscribe(obj -> Timber.d("task complete"), Throwable::printStackTrace);
+                .subscribe(obj -> {
+                    handler.sendEmptyMessage(0);
+                }, Throwable::printStackTrace);
     }
 
     Handler handler = new Handler() {

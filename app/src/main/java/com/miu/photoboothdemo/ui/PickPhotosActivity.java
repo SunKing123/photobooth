@@ -66,8 +66,10 @@ public class PickPhotosActivity extends BaseActivity implements PickPhotosView, 
             intent.putExtra("image_name", image.getName());
             intent.putExtra("image_path", image.getPath());
             intent.putExtra("image_create_time", image.getCreateTime());
+
+            setResult(RESULT_OK, intent);
+            finish();
         }
-        setResult(RESULT_OK, intent);
-        finish();
+
     }
 }
