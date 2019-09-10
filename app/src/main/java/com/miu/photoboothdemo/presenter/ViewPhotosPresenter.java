@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import timber.log.Timber;
 
 public class ViewPhotosPresenter extends Presenter<PickPhotosView> {
 

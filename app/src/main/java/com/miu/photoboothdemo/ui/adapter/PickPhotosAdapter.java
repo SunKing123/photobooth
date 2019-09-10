@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.miu.photoboothdemo.R;
 import com.miu.photoboothdemo.model.ImageBean;
 import com.miu.photoboothdemo.util.DateUtil;
@@ -43,8 +44,7 @@ public class PickPhotosAdapter extends RecyclerView.Adapter {
         if (entity != null) {
             String photoName = entity.getName();
             ((DemoViewHolder) holder).mText.setText(photoName.substring(0, photoName.indexOf(".")));
-            Bitmap bm = BitmapFactory.decodeFile(entity.getPath());
-            ((DemoViewHolder) holder).mImageView.setImageBitmap(bm);
+            Glide.with(mContext).load(entity.getPath()).crossFade().into(((DemoViewHolder) holder).mImageView);
             ((DemoViewHolder) holder).mCreateTime.setText(DateUtil.getDateByLongTime(entity.getCreateTime()));
 
             ((DemoViewHolder) holder).mImageView.setOnClickListener(view -> {

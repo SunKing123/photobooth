@@ -214,8 +214,6 @@ public class HomeActivity extends BaseActivity {
                         String imagePath = data.getStringExtra("image_path");
                         long imageCreateTime = data.getLongExtra("image_create_time", 0);
 
-                        Bitmap bm = null;
-
                         mNameTv.setVisibility(TextUtils.isEmpty(imageName) ? View.GONE : View.VISIBLE);
                         mName.setText(imageName);
 

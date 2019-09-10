@@ -7,5 +7,5 @@ import java.util.List;
 public interface PickPhotosView extends View {
 
 
-    void showPhotoViews(List<ImageBean> imageBeanList);
+     void showPhotoViews(List<ImageBean> imageBeanList);
 }
