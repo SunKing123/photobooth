@@ -45,7 +45,6 @@ public class PickPhotosActivity extends BaseActivity implements PickPhotosView, 
         presenter.getImages();
     }
 
-
     @Override
     public void showPhotoViews(List<ImageBean> imageBeanList) {
         loading.setVisibility(View.GONE);
