@@ -41,7 +41,8 @@ public class PickPhotosAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ImageBean entity = imageBeanList.get(position);
         if (entity != null) {
-            ((DemoViewHolder) holder).mText.setText(entity.getName());
+            String photoName = entity.getName();
+            ((DemoViewHolder) holder).mText.setText(photoName.substring(0, photoName.indexOf(".")));
             Bitmap bm = BitmapFactory.decodeFile(entity.getPath());
             ((DemoViewHolder) holder).mImageView.setImageBitmap(bm);
             ((DemoViewHolder) holder).mCreateTime.setText(DateUtil.getDateByLongTime(entity.getCreateTime()));
