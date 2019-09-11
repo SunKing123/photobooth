@@ -1,8 +1,7 @@
 package com.miu.photoboothdemo.model;
 
 public class ImageBean {
-
-
+    
     private String name;
 
     private String path;

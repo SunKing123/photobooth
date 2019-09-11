@@ -26,6 +26,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.miu.photoboothdemo.Constant;
 import com.miu.photoboothdemo.R;
+import com.miu.photoboothdemo.model.DaggerMainComponent;
+import com.miu.photoboothdemo.model.MainModule;
 import com.miu.photoboothdemo.presenter.PhotoLocalPresenter;
 import com.miu.photoboothdemo.util.BitmapProcessor;
 import com.miu.photoboothdemo.util.DateUtil;
@@ -37,6 +39,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -46,7 +50,6 @@ import butterknife.OnClick;
  * Take a photo & show view photos
  */
 public class HomeActivity extends BaseActivity {
-
 
     @BindView(R.id.take_photo_btn)
     Button mButtonTakePhoto;
@@ -70,11 +73,11 @@ public class HomeActivity extends BaseActivity {
     TextView mCreateTime;
 
     Uri mUri;
-
-    private BitmapProcessor bitmapProcessor;
     private String inputName = null;
-    PhotoLocalPresenter presenter;
     private String mPhotoPath;
+
+    @Inject
+    PhotoLocalPresenter presenter;
 
     @Override
     protected int bindLayout() {
@@ -84,9 +87,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-
-        bitmapProcessor = BitmapProcessor.getInstance();
-        presenter = new PhotoLocalPresenter(this);
+        DaggerMainComponent.builder().mainModule(new MainModule(this)).build().inject(this);
     }
 
     @OnClick(R.id.take_photo_btn)
@@ -261,7 +262,7 @@ public class HomeActivity extends BaseActivity {
                             mCreateTime.setText(createTime);
                             mCreateTimeTv.setVisibility(TextUtils.isEmpty(createTime) ? View.GONE : View.VISIBLE);
 
-                            Bitmap bm = bitmapProcessor.getBitmapFormUri(this, uri);
+                            Bitmap bm = BitmapProcessor.getInstance().getBitmapFormUri(this, uri);
                             mImageView.setImageBitmap(bm);
 
 

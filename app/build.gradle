@@ -59,4 +59,6 @@ dependencies {
     // Coroutine listeners for Anko Layouts
     implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+    implementation 'com.google.dagger:dagger:2.24'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.24'
 }

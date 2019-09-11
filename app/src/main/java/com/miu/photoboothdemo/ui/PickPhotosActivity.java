@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.miu.photoboothdemo.R;
+import com.miu.photoboothdemo.model.DaggerMainComponent;
 import com.miu.photoboothdemo.model.ImageBean;
+import com.miu.photoboothdemo.model.MainModule;
 import com.miu.photoboothdemo.presenter.ViewPhotosPresenter;
 import com.miu.photoboothdemo.ui.adapter.PickPhotosAdapter;
 import com.miu.photoboothdemo.util.DividerGridItemDecoration;
 import com.miu.photoboothdemo.view.PickPhotosView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -29,6 +33,7 @@ public class PickPhotosActivity extends BaseActivity implements PickPhotosView, 
 
     private PickPhotosAdapter mAdapter;
 
+    @Inject
     ViewPhotosPresenter presenter;
 
     @Override
@@ -39,7 +44,7 @@ public class PickPhotosActivity extends BaseActivity implements PickPhotosView, 
     @Override
     protected void initData() {
         super.initData();
-        presenter = new ViewPhotosPresenter(this, this);
+        DaggerMainComponent.builder().mainModule(new MainModule(this, this)).build().inject(this);
 
         loading.setVisibility(View.VISIBLE);
         presenter.getImages();
